@@ -2,7 +2,6 @@ Ext.ns('Tomtalk');
 
 var catTagStore = Ext.create('Ext.data.Store', {
     fields: ['id', 'name'],
-    autoLoad: true,
     proxy: {
         type: 'ajax',
         url: '/admin/getCatTagList',
@@ -50,6 +49,7 @@ Ext.define('Tomtalk.FormUI', {
             {
                 xtype: 'tagfield',
                 fieldLabel: '相关分类',
+                id: this.id + '_cat_tag',
                 store: catTagStore,
                 anchor: '50%',
                 name: 'cat_id[]',
@@ -101,6 +101,7 @@ Ext.define('Tomtalk.FormAction', {
         Tomtalk.FormAction.superclass.initComponent.call(this);
 
         Ext.apply(this.COMPONENTS, {
+            catTag: Ext.getCmp(this.id + '_cat_tag'),
             saveBtn: Ext.getCmp(this.id + '_save'),
             returnBtn: Ext.getCmp(this.id + '_return')
         });

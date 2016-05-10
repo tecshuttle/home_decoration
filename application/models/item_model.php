@@ -86,6 +86,41 @@ class item_model extends CI_Model
         return $data[0];
     }
 
+    public function save($option)
+    {
+        //保存分类标签
+        $option['cat_id'] = implode(',', $option['cat_id']);
+
+        //保存品牌信息
+        if ($option['id'] == 0) {
+            $this->insert($option);
+            $pid = $this->db->insert_id();
+        } else {
+            $this->update($option);
+            $pid = $option['id'];
+        }
+
+        //增加标签记录
+        $this->update_tagging($pid, $option['cat_id']);
+    }
+
+    private function update_tagging($id, $tag_id_str)
+    {
+        $this->load->model('item_cat_tagged_model');
+        $this->item_cat_tagged_model->deleteByItemID($id);
+
+        if ($tag_id_str === '') return;
+
+        $tagging = explode(',', $tag_id_str);
+
+        foreach ($tagging as $cat_id) {
+            $this->item_cat_tagged_model->insert(array(
+                'item_id' => $id,
+                'cat_id' => $cat_id
+            ));
+        }
+    }
+
     function update($option)
     {
         $this->db->update($this->table, $option, array('id' => $option['id']));

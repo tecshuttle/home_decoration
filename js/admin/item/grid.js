@@ -17,7 +17,10 @@ Ext.define('Tomtalk.gridUI', {
                     header: "显示顺序", dataIndex: 'order'
                 },
                 {
-                    header: "名称", dataIndex: 'name'
+                    header: "单品名称", dataIndex: 'name'
+                },
+                {
+                    header: "品牌", dataIndex: 'brand_name'
                 },
                 {
                     header: "说明", dataIndex: 'desc'
@@ -168,6 +171,7 @@ Ext.define('Tomtalk.gridAction', {
         var $c = this.up().COMPONENTS;
 
         $c.grid.hide();
+        $c.form._loadBrandCombo();
         $c.form.getForm().reset();
         $c.form.show();
     },
@@ -176,6 +180,10 @@ Ext.define('Tomtalk.gridAction', {
         var $c = this.up().COMPONENTS;
 
         $c.grid.hide();
+        $c.form._loadBrandCombo();
+        if (rec.data.cat_id !== null) {
+            rec.data['cat_id[]'] = rec.data.cat_id.split(','); //给tag赋值，转一下格式
+        }
         $c.form.getForm().setValues(rec.data);
         $c.form.show();
     }

@@ -20,6 +20,9 @@ Ext.define('Tomtalk.gridUI', {
                     header: "品牌名称", dataIndex: 'name'
                 },
                 {
+                    header: "相关分类", dataIndex: 'cat_name'
+                },
+                {
                     header: "说明", dataIndex: 'desc'
                 },
                 {

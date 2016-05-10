@@ -1,14 +1,33 @@
 Ext.ns('Tomtalk');
 
-var scroll_img_store = Ext.create('Ext.data.Store', {
-    fields: ['type_id', 'name'],
-    data: [
-        [0, '首页'],
-        [225, '荣归'],
-        [223, '旅行那些事儿'],
-        [227, '天下足球'],
-        [233, '我是铁杆']
-    ]
+var catTagStore = Ext.create('Ext.data.Store', {
+    fields: ['id', 'name'],
+    proxy: {
+        type: 'ajax',
+        url: '/admin/getCatTagList',
+        reader: {
+            type: 'json',
+            root: 'data',
+            totalProperty: 'total'
+        }
+    }
+});
+
+var brandStore = Ext.create('Ext.data.Store', {
+    fields: ['id', 'name'],
+    pageSize: 9999,
+    proxy: {
+        type: 'ajax',
+        url: '/admin/getList',
+        extraParams: {
+            module: 'brand'
+        },
+        reader: {
+            type: 'json',
+            root: 'data',
+            totalProperty: 'total'
+        }
+    }
 });
 
 Ext.define('Tomtalk.FormUI', {
@@ -38,10 +57,33 @@ Ext.define('Tomtalk.FormUI', {
             },
             {
                 xtype: 'textfield',
-                fieldLabel: '主题名称',
+                fieldLabel: '单品名称',
+                allowBlank: false,
                 anchor: '50%',
                 name: 'name',
                 emptyText: '请输入…'
+            },
+            {
+                xtype: 'tagfield',
+                fieldLabel: '相关分类',
+                id: this.id + '_cat_tag',
+                store: catTagStore,
+                anchor: '50%',
+                name: 'cat_id[]',
+                displayField: 'name',
+                filterPickList: true,
+                valueField: 'id'
+            },
+            {
+                xtype: 'combo',
+                fieldLabel: '品牌',
+                id: this.id + '_brand_combo',
+                store: brandStore,
+                anchor: '50%',
+                displayField: 'name',
+                valueField: 'id',
+                name: 'brand_id',
+                queryMode: 'local'
             },
             {
                 xtype: 'numberfield',
@@ -87,6 +129,8 @@ Ext.define('Tomtalk.FormAction', {
         Tomtalk.FormAction.superclass.initComponent.call(this);
 
         Ext.apply(this.COMPONENTS, {
+            catTag: Ext.getCmp(this.id + '_cat_tag'),
+            brandCombo: Ext.getCmp(this.id + '_brand_combo'),
             saveBtn: Ext.getCmp(this.id + '_save'),
             returnBtn: Ext.getCmp(this.id + '_return')
         });
@@ -108,6 +152,10 @@ Ext.define('Tomtalk.FormAction', {
         if (this.up()) {
             this.up()._returnFrom();
         }
+    },
+
+    _loadBrandCombo: function () {
+        this.COMPONENTS.brandCombo.getStore().load();
     },
 
     _save: function () {
