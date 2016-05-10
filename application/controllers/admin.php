@@ -783,6 +783,50 @@ class admin extends MY_Controller
         $this->load->view('admin/header', $data);
         $this->load->view('admin/script', $data);
     }
+
+    public function tuan_bill()
+    {
+        $data = array(
+            'title' => 'admin-团购订单',
+            'css' => array(
+                '/js/extjs6/build/MyApp-all.css',
+                '/css/admin.css'
+            ),
+            'js' => array(
+                '/js/extjs6/ext-all.js',
+                '/js/admin/common/columnAction.js',
+                '/js/moment.js',
+                '/js/admin/tuan/bill_grid.js',
+                '/js/admin/tuan/bill_form.js',
+                '/js/admin/tuan/bill_panel.js'
+            )
+        );
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/script', $data);
+    }
+
+    public function dealer()
+    {
+        $data = array(
+            'title' => 'admin-商家',
+            'css' => array(
+                '/js/extjs6/build/MyApp-all.css',
+                '/css/admin.css'
+            ),
+            'js' => array(
+                '/js/extjs6/ext-all.js',
+                '/js/admin/common/columnAction.js',
+                '/js/moment.js',
+                '/js/admin/dealer/grid.js',
+                '/js/admin/dealer/form.js',
+                '/js/admin/dealer/panel.js'
+            )
+        );
+
+        $this->load->view('admin/header', $data);
+        $this->load->view('admin/script', $data);
+    }
 }
 
 /* End of file */

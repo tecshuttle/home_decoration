@@ -26,6 +26,11 @@ Docs.Menu = [
                 leaf: true
             },
             {
+                href: "/admin/dealer",
+                text: "商家",
+                leaf: true
+            },
+            {
                 href: "/admin/item",
                 text: "单品",
                 leaf: true
@@ -40,6 +45,10 @@ Docs.Menu = [
             {
                 href: "/admin/tuan",
                 text: "团购",
+                leaf: true
+            }, {
+                href: "/admin/tuan_bill",
+                text: "团购订单",
                 leaf: true
             }
         ]
