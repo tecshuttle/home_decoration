@@ -35,17 +35,17 @@ Ext.define('Ext.ijobs.index.TreeMenu', {
 
     _createTreeView: function () {
         var tpl = new Ext.XTemplate(
-                //'<div class="left-wrapper">主导航</div>',
-                '<dl class="leftnav">',
-                '<dl class="x-item">',
-                '<tpl for=".">',
-                '<dt class="active"><span class="ico_desk"></span>{menu}</dt>',
-                '<tpl for="subMenu">',
-                '<dd class="x-item"><span class="nav_arrow"></span><a id="{id}" href="javascript:void(0);" to="{url}" tabTitle="{menu}">{menu}</a></dd>',
-                '</tpl>',
-                '</tpl>',
-                '</dl>',
-                '</dl>'
+            //'<div class="left-wrapper">主导航</div>',
+            '<dl class="leftnav">',
+            '<dl class="x-item">',
+            '<tpl for=".">',
+            '<dt class="active"><span class="ico_desk"></span>{menu}</dt>',
+            '<tpl for="subMenu">',
+            '<dd class="x-item"><span class="nav_arrow"></span><a id="{id}" href="javascript:void(0);" to="{url}" tabTitle="{menu}">{menu}</a></dd>',
+            '</tpl>',
+            '</tpl>',
+            '</dl>',
+            '</dl>'
             ),
             updateIndexes = function (startIndex, endIndex) {
                 var ns = this.all.elements,
@@ -232,7 +232,7 @@ Ext.onReady(function () {
         boxMinWidth: 1130,
         listeners: {
             afterrender: function () {//如果有默认首页就打开设置的页面
-                mainPanel.createNewTab('/admin/articles', Math.random(), '文章管理');
+                mainPanel.createNewTab('/admin/tuan', Math.random(), '团购');
             }
         }
     });
@@ -289,7 +289,8 @@ Ext.onReady(function () {
         },
         getTabTitle: function (id) {
             return mainPanel.COMPONENT.contentTab.getItem(id).title;
-        }};
+        }
+    };
 
 
     /**
@@ -319,7 +320,7 @@ Ext.onReady(function () {
             user: {cls: 'user-center', name: '内容管理'},
             job: {cls: 'job-manage', name: '日志'},
             data: {cls: 'data', name: '订单管理'},
-            admin: {cls: 'admin-entrance', name: '微信设置'},
+            admin: {cls: 'admin-entrance', name: '团购'},
             step: {cls: 'step-component', name: '步骤'},
             set: {cls: 'set', name: '系统设置'}
         };
@@ -486,7 +487,7 @@ Ext.onReady(function () {
             buildTopMenu();
             applyTopMenuHover();
 
-            var index = 0;//默认选中内容管理
+            var index = 1;   //默认选中内容管理
             var menu = Ext.get(Ext.query('#header>ul[id="topmenu"]>li')[index]);
 
             var normalCls = menu.getAttribute('class');

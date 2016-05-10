@@ -17,7 +17,7 @@ class admin extends MY_Controller
 
         $data = array(
             'user' => $admin,
-            'msg' => 'admin',
+            'title' => 'admin',
             'base_url' => $this->config->config['base_url'],
             'css' => array(
                 '/js/extjs4/resources/css/ext-all.css',

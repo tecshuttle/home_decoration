@@ -12,51 +12,34 @@ Docs.Menu = [
             },
             {
                 href: "/admin/articles",
-                text: "文章管理",
+                text: "文章",
                 leaf: true
             },
             {
-                href: "/admin/tags",
-                text: "服务主题",
+                href: "/admin/cat",
+                text: "分类",
                 leaf: true
             },
             {
-                href: "/admin/equipments",
-                text: "产品管理",
+                href: "/admin/brand",
+                text: "品牌",
+                leaf: true
+            },
+            {
+                href: "/admin/item",
+                text: "单品",
                 leaf: true
             }
         ]
     },
     {
         id: 'admin',
-        text: '微信设置',
+        text: '团购',
         isMutilLevel: false,
         children: [
             {
-                href: "/admin/weixin",
-                text: "微信设置",
-                leaf: true
-            },
-            {
-                href: "/admin/weixin_auto_reply",
-                text: "自动消息回复",
-                leaf: true
-            },
-            {
-                href: "/admin/weixin_menu",
-                text: "自定义菜单",
-                leaf: true
-            }
-        ]
-    },
-    {
-        id: 'job',
-        text: '日志',
-        isMutilLevel: false,
-        children: [
-            {
-                href: "/admin/func_log",
-                text: "API调用",
+                href: "/admin/tuan",
+                text: "团购",
                 leaf: true
             }
         ]
