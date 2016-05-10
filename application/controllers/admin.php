@@ -683,17 +683,19 @@ class admin extends MY_Controller
         unset($option['module']);
 
         $this->load->model($model);
-
-        if ($option['id'] == 0) {
-            $this->$model->insert($option);
-        } else {
-            $this->$model->update($option);
-        }
+        $this->$model->save($option);
 
         echo json_encode(array('success' => true));
     }
 
-    /*****************************************家装 后面页面******************************************/
+    public function getCatTagList()
+    {
+        $this->load->model('cat_model');
+        $data = $this->cat_model->getTagList();
+        echo json_encode($data);
+    }
+
+    /*****************************************家装 后台页面******************************************/
     public function cat()
     {
         $data = array(

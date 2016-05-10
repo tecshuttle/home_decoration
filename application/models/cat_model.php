@@ -72,6 +72,18 @@ class cat_model extends CI_Model
         ));
     }
 
+    //后台grid调用
+    function getTagList()
+    {
+        $sql = "SELECT id, name, `order` FROM $this->table order by `order` asc";
+
+        $query = $this->db->query($sql);
+
+        return (array(
+            'data' => $query->result()
+        ));
+    }
+
     function deleteByID($id)
     {
         $this->db->delete($this->table, array('id' => $id));

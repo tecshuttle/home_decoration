@@ -17,7 +17,7 @@ Ext.define('Tomtalk.gridUI', {
                     header: "显示顺序", dataIndex: 'order'
                 },
                 {
-                    header: "主题名称", dataIndex: 'name'
+                    header: "名称", dataIndex: 'name'
                 },
                 {
                     header: "说明", dataIndex: 'desc'

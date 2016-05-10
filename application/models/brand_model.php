@@ -67,7 +67,21 @@ class brand_model extends CI_Model
         $this->db->order_by('order', 'ASC');
         $query = $this->db->get($this->table, $option['limit'], $option['start']);
 
-        return (array('data' => $query->result(),
+        return (array(
+            'data' => $query->result(),
+            'total' => $this->db->count_all_results($this->table)
+        ));
+    }
+
+    //后台grid调用
+    function getTagList()
+    {
+        $sql = 'SELECT * FROM ' . $this->table;
+
+        $query = $this->db->query($sql);
+
+        return (array(
+            'data' => $query->result(),
             'total' => $this->db->count_all_results($this->table)
         ));
     }
@@ -84,6 +98,41 @@ class brand_model extends CI_Model
         $data = $query->result();
 
         return $data[0];
+    }
+
+    public function save($option)
+    {
+        //保存分类标签
+        $option['cat_id'] = implode(',', $option['cat_id']);
+
+        //保存品牌信息
+        if ($option['id'] == 0) {
+            $this->insert($option);
+            $pid = $this->db->insert_id();
+        } else {
+            $this->update($option);
+            $pid = $option['id'];
+        }
+
+        //增加标签记录
+        $this->update_tagging($pid, $option['cat_id']);
+    }
+
+    private function update_tagging($id, $tag_id_str)
+    {
+        $this->load->model('brand_cat_tagged_model');
+        $this->brand_cat_tagged_model->deleteByBrandID($id);
+
+        if ($tag_id_str === '') return;
+
+        $tagging = explode(',', $tag_id_str);
+
+        foreach ($tagging as $cat_id) {
+            $this->brand_cat_tagged_model->insert(array(
+                'brand_id' => $id,
+                'cat_id' => $cat_id
+            ));
+        }
     }
 
     function update($option)
