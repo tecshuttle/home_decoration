@@ -1,0 +1,51 @@
+#images-view .thumb img {
+    height: 150px;
+    width: 150px;
+}
+
+#images-view .thumb-wrap {
+    float: left;
+    margin: 4px;
+    margin-right: 0;
+    padding: 5px;
+    text-align: center;
+}
+
+#images-view .x-item-over{
+    border:1px solid #dddddd;
+    padding: 4px;
+}
+
+#images-view .x-item-selected{
+    border:1px solid #99bbe8;
+    padding: 4px;
+    background-color:#c3daf9;
+}
+
+#images-view .x-item-selected .thumb{
+    background:transparent;
+}
+
+.x-view-selector {
+    position:absolute;
+    left:0;
+    top:0;
+    width:0;
+    border:1px dotted;
+    opacity: .5;
+    -moz-opacity: .5;
+    filter:alpha(opacity=50);
+    zoom:1;
+    background-color:#c3daf9;
+    border-color:#3399bb;
+}
+
+.x-grid-body {
+    border-width: 1px 1px 1px;
+}
+
+.x-editable {
+    line-height: 30px;
+}
+
+/* end file */

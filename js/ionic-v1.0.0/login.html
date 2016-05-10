@@ -1,0 +1,182 @@
+<html ng-app="ionicApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <title>Sign-in, Then Tabs Example</title>
+
+    <link href="/js/ionic-v1.0.0/css/ionic.min.css" rel="stylesheet">
+    <script src="/js/ionic-v1.0.0/js/ionic.bundle.min.js"></script>
+    <script src="/js/ionic-v1.0.0/js/angular/angular-messages.min.js"></script>
+    <script src="/js/ionic-v1.0.0/app.js"></script>
+
+</head>
+
+<style>
+    .bar .buttons span.default-title {
+        display: none;
+    }
+
+    .bar .buttons span.previous-title {
+        display: none;
+    }
+
+    p {
+        line-height: 2em;
+    }
+</style>
+<body>
+
+<ion-nav-bar class="bar-positive">
+    <ion-nav-back-button class="button-icon ion-arrow-left-c">
+    </ion-nav-back-button>
+</ion-nav-bar>
+
+<ion-nav-view></ion-nav-view>
+
+<script id="templates/email-mobile.html" type="text/ng-template">
+    <ion-view view-title="选择找回密码方式">
+        <ion-content>
+            <div class="list">
+                <label class="item item-radio">
+                    <input type="radio" name="group" value="email" ng-model="formData.method">
+
+                    <div class="item-content"> 邮箱</div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+
+                <label class="item item-radio">
+                    <input type="radio" name="group" value="mobile" ng-model="formData.method">
+
+                    <div class="item-content"> 手机</div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </div>
+            <div class="padding">
+                <button class="button button-block button-positive" ng-click="next(formData.method)">
+                    下一步
+                </button>
+            </div>
+        </ion-content>
+    </ion-view>
+</script>
+
+<script id="templates/email.html" type="text/ng-template">
+    <ion-view view-title="输入邮箱地址">
+        <ion-content>
+            <form name="emailForm">
+                <div ng-show="message">{{message}}</div>
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label">注册邮箱</span>
+                        <input type="email" ng-model="email" required>
+                    </label>
+                </div>
+
+                <div class="padding">
+                    <button class="button button-block button-positive" ng-click="next(email)" ng-disabled="!emailForm.$valid">
+                        下一步
+                    </button>
+                </div>
+            </form>
+        </ion-content>
+    </ion-view>
+</script>
+
+<script id="templates/email-ok.html" type="text/ng-template">
+    <ion-view view-title="重置密码邮件已发送">
+        <ion-content padding="true">
+            <p>我们向您的企业邮箱 XXXX 发送了一封验证邮件，请查收邮箱并点击验证链接以完成验证。 </p>
+
+            <p style="color:orange;">验证邮件在10分钟之内有效。</p>
+
+            <a href="/" class="button button-block button-positive">返回首页</a>
+        </ion-content>
+    </ion-view>
+</script>
+
+<script id="templates/mobile.html" type="text/ng-template">
+    <ion-view view-title="确认用户身份">
+        <ion-content>
+            <form name="mobileForm">
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label">注册手机</span>
+                        <input type="text" name="mobile" ng-model="user.mobile" required ng-pattern="/^(((1[0-9]{2}))+\d{8})$/">
+                    </label>
+
+                    <label class="item item-input" ng-show="mobileForm.mobile.$valid">
+                        <span class="input-label">验证码</span>
+                        <input type="text" name="smsCode" ng-model="user.smsCode" required ng-pattern="/^\d{6}$/">
+                    </label>
+                </div>
+
+                <div class="padding" ng-show="!user.smsCodeOk && mobileForm.mobile.$valid && mobileForm.smsCode.$invalid">
+                    <button class="button button-block button-positive" ng-click="sendSMS(user)" ng-disabled="mobileForm.mobile.$invalid">
+                        获取手机验证码
+                    </button>
+                </div>
+
+                <div class="padding" ng-show="!user.smsCodeOk && mobileForm.mobile.$valid && mobileForm.smsCode.$valid">
+                    <button class="button button-block button-positive" ng-click="checkSMS(user)">
+                        校验验证码
+                    </button>
+                </div>
+
+                <div class="padding" ng-show="user.smsCodeOk">
+                    <button class="button button-block button-positive" ng-click="next(user)">
+                        下一步
+                    </button>
+                </div>
+            </form>
+        </ion-content>
+    </ion-view>
+</script>
+
+<script id="templates/new-password.html" type="text/ng-template">
+    <ion-view view-title="设置新密码">
+        <ion-content>
+            <form name="newPasswordForm">
+                <div class="list">
+                    <label class="item item-input">
+                        <span class="input-label">新密码</span>
+                        <input type="password" name="pwd1" ng-model="user.pwd1" required ng-pattern="/^\d{6}$/">
+                    </label>
+
+                    <label class="item item-input">
+                        <span class="input-label">确认密码</span>
+                        <input type="password" name="pwd2" ng-model="user.pwd2" required ng-pattern="/^\d{6}$/">
+                    </label>
+                </div>
+
+                <div class="padding">
+                    <button class="button button-block button-positive" ng-click="submit(user)" ng-disabled="!user.same || newPasswordForm.pwd1.$invalid || newPasswordForm.pwd2.$invalid">
+                        提交
+                    </button>
+                </div>
+            </form>
+        </ion-content>
+    </ion-view>
+</script>
+
+
+<script id="templates/ok.html" type="text/ng-template">
+    <ion-view view-title="设置密码">
+        <ion-content padding="true" style="text-align: center">
+            <br/>
+            <br/>
+            <br/>
+
+            <p>设置成功，请牢记新的登录密码。 </p>
+
+            <br/>
+            <br/>
+            <br/>
+            <a href="/" class="button button-block button-positive">重新登录</a>
+        </ion-content>
+    </ion-view>
+</script>
+
+</body>
+</html>
+

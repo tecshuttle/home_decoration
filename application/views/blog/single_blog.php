@@ -1,0 +1,1 @@
+<div class="ng-blog content"> <?= $content ?> </div>
