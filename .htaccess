@@ -6,7 +6,7 @@ RewriteRule ^(ImageBrowser/Thumbnail/)$ ImageBrowser/Thumbnail/%1%2.%3
 RewriteCond %{QUERY_STRING} ^path=(\w+)\.(\w+)$
 RewriteRule ^(ImageBrowser/Thumbnail/)$ ImageBrowser/Thumbnail/%1.%2
 
-RewriteCond $1 !^(index\.php|file|uploads|fonts|html|api|ImageBrowser|index.html|style|editor.php|images|xml|media|data|assets|css|js|scripts|responses|tools|test\.php|robots\.txt)
+RewriteCond $1 !^(index\.php|file|uploads|fonts|m|html|api|ImageBrowser|index.html|style|editor.php|images|xml|media|data|assets|css|js|scripts|responses|tools|test\.php|robots\.txt)
 RewriteRule ^(.*)$ /index.php/$1 [L]
 
 # END WordPress

@@ -1,0 +1,49 @@
+<ion-view view-title="分类">
+    <ion-content>
+        <div>
+            <div style="float:left;width:25%;text-align: center;">
+                <ul class="list">
+                    <li ng-class="open_day == 1 ? 'item active': 'item'" ng-click="tagClick(1)"> 周一</li>
+                    <li ng-class="open_day == 2 ? 'item active': 'item'" class="item" ng-click="tagClick(2)"> 周二</li>
+                    <li ng-class="open_day == 3 ? 'item active': 'item'" class="item" ng-click="tagClick(3)"> 周三</li>
+                    <li ng-class="open_day == 4 ? 'item active': 'item'" class="item" ng-click="tagClick(4)"> 周四</li>
+                    <li ng-class="open_day == 5 ? 'item active': 'item'" class="item" ng-click="tagClick(5)"> 周五</li>
+                    <li ng-class="open_day == 6 ? 'item active': 'item'" class="item" ng-click="tagClick(6)"> 周六</li>
+                    <li ng-class="open_day == 7 ? 'item active': 'item'" class="item" ng-click="tagClick(7)"> 周日</li>
+                </ul>
+            </div>
+
+            <div style="float:left;width:75%;">
+                <ion-list>
+                    <ion-item class="item-remove-animate item-thumbnail-left item-icon-right"
+                              ng-repeat="chat in chats" type="item-text-wrap">
+                        <img ng-src="{{chat.face}}">
+                        <h2>{{chat.name}}</h2>
+                        <br/> <br/>
+                        <p>￥{{chat.price}} / 份</p>
+
+
+                        <i class="icon ion-ios-minus-outline" ng-show="cart.length" ng-click="subClick(chat)"
+                           style="right: 3em;"></i>
+
+                        <span class="icon" ng-show="cart.length" style="right:2em;">{{cart.length}}</span>
+
+                        <i class="icon ion-ios-plus-outline" ng-click="addClick(chat)"></i>
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
+    </ion-content>
+
+    <ion-footer-bar align-title="left" class="bar-assertive">
+        <div class="buttons">
+            <button class="button button-light" ng-click="doSomething()">{{cart.length}}</button>
+        </div>
+
+        <h1 class="title">总价：￥{{cart | getCartTotal}}</h1>
+
+        <div class="buttons">
+            <button class="button button-light">选好了</button>
+        </div>
+    </ion-footer-bar>
+</ion-view>

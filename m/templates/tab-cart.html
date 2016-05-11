@@ -1,0 +1,42 @@
+<ion-view view-title="团购">
+    <ion-content>
+        <div class="list">
+            <a class="item item-thumbnail-left" href="#">
+                <img src="img/ben.png">
+                <h2>香菇虾仁蒸水蛋</h2>
+                <br/>
+                <br/>
+                <p>$11.8 / 份</p>
+            </a>
+
+            <a class="item item-thumbnail-left" href="#">
+                <img src="img/adam.jpg">
+                <h2>小炒鸭胸肉（不辣）</h2>
+                <br/>
+                <br/>
+                <p>$11.8 / 份</p>
+            </a>
+
+            <a class="item " href="#">
+                <p>商品总价：￥23.6</p>
+                <p>免配送费</p>
+            </a>
+
+            <div class="item item-divider"> 应付金额：￥23.6</div>
+        </div>
+
+        <h3>下单</h3>
+        <div class="list">
+            <ion-list>
+                <ion-radio ng-model="choice" ng-value="'A'">取餐地址 A</ion-radio>
+                <ion-radio ng-model="choice" ng-value="'B'">取餐地址 B</ion-radio>
+            </ion-list>
+
+            <label class="item item-input">
+                <input type="text" placeholder="订单备注">
+            </label>
+
+            <button class="button button-full button-balanced"> 去结算</button>
+        </div>
+    </ion-content>
+</ion-view>

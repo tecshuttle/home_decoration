@@ -1,0 +1,52 @@
+<ion-view view-title="主页">
+    <ion-content class="padding">
+        <ion-slide-box on-slide-changed="slideHasChanged($index)">
+            <ion-slide>
+                <div class="box blue" style="background-color: blue;height: 10em;text-align: center;padding-top: 2em;">
+                    <h1> 滚动图1</h1></div>
+            </ion-slide>
+
+            <ion-slide>
+                <div class="box yellow"
+                     style="background-color: yellow;height: 10em;text-align: center;padding-top: 2em;"><h1>
+                    滚动图2</h1></div>
+            </ion-slide>
+
+            <ion-slide>
+                <div class="box pink" style="background-color: pink;height: 10em;text-align: center;padding-top: 2em;">
+                    <h1>
+                        滚动图3</h1></div>
+            </ion-slide>
+        </ion-slide-box>
+
+        <div class="row">
+            <div class="col">下单</div>
+            <div class="col">我的订单</div>
+            <div class="col">我的优惠券</div>
+            <div class="col">我的积分</div>
+        </div>
+
+        <div class="list card">
+            <div class="item "> 公告</div>
+            <div class="item item-body">
+                <p>
+                    This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
+                    the content is from a card-body consisting of an image and paragraph text. The footer
+                    consists of tabs, icons aligned left, within the card-footer.
+                </p>
+            </div>
+        </div>
+
+        <div class="list card">
+            <a href="#" class="item "> 店铺信息 </a>
+            <a href="#" class="item "> 最新评论 </a>
+        </div>
+
+        <div class="card">
+            <div class="item item-text-wrap">
+                法律声明 页脚
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

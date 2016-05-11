@@ -21,6 +21,9 @@ class Welcome extends MY_Controller
      */
     public function index()
     {
+        header('location: /m');
+        exit;
+
         $this->load->model('articles_model');
         $this->load->model('types_model');
         $this->load->model('equipments_model');
