@@ -64,10 +64,15 @@ class tuan_model extends CI_Model
 
     function getList($option)
     {
-        $this->db->order_by('order', 'ASC');
-        $query = $this->db->get($this->table, $option['limit'], $option['start']);
+        $sql = "select tuan.*, item.name as item_name from tuan
+                left join item on (tuan.item_id = item.id)
+                order by tuan.`order` ASC
+                limit ${option['start']}, ${option['limit']}";
 
-        return (array('data' => $query->result(),
+        $query = $this->db->query($sql);
+
+        return (array(
+            'data' => $query->result(),
             'total' => $this->db->count_all_results($this->table)
         ));
     }
@@ -84,6 +89,16 @@ class tuan_model extends CI_Model
         $data = $query->result();
 
         return $data[0];
+    }
+
+    public function save($option)
+    {
+        //保存品牌信息
+        if ($option['id'] == 0) {
+            $this->insert($option);
+        } else {
+            $this->update($option);
+        }
     }
 
     function update($option)

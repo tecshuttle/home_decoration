@@ -17,16 +17,16 @@ Ext.define('Tomtalk.gridUI', {
                     header: "显示顺序", dataIndex: 'order'
                 },
                 {
-                    header: "品牌名称", dataIndex: 'name'
+                    header: "品牌名称", dataIndex: 'name', flex: 1
                 },
                 {
-                    header: "相关分类", dataIndex: 'cat_name'
+                    header: "相关分类", dataIndex: 'cat_name', flex: 1
                 },
                 {
-                    header: "说明", dataIndex: 'desc'
+                    header: "说明", dataIndex: 'desc', flex: 1
                 },
                 {
-                    header: "最后修改时间", dataIndex: 'mtime',
+                    header: "最后修改时间", dataIndex: 'mtime', align: 'center', width: 100,
                     renderer: function (v) {
                         var date = new Date(v * 1000);
                         return moment(date).format('YYYY-MM-DD');
@@ -35,7 +35,8 @@ Ext.define('Tomtalk.gridUI', {
                 {
                     header: "操作",
                     dataIndex: 'id',
-                    align: 'left',
+                    align: 'center',
+                    width: 120,
                     xtype: 'actioncolumn',
                     name: 'opertation',
                     items: [{

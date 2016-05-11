@@ -64,10 +64,15 @@ class item_model extends CI_Model
 
     function getList($option)
     {
-        $this->db->order_by('order', 'ASC');
-        $query = $this->db->get($this->table, $option['limit'], $option['start']);
+        $sql = "select item.*, brand.name as brand_name from item
+                left join brand on (item.brand_id = brand.id)
+                order by item.`order` ASC
+                limit ${option['start']}, ${option['limit']}";
 
-        return (array('data' => $query->result(),
+        $query = $this->db->query($sql);
+
+        return (array(
+            'data' => $query->result(),
             'total' => $this->db->count_all_results($this->table)
         ));
     }

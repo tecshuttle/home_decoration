@@ -1,14 +1,20 @@
 Ext.ns('Tomtalk');
 
-var scroll_img_store = Ext.create('Ext.data.Store', {
-    fields: ['type_id', 'name'],
-    data: [
-        [0, '首页'],
-        [225, '荣归'],
-        [223, '旅行那些事儿'],
-        [227, '天下足球'],
-        [233, '我是铁杆']
-    ]
+var itemStore = Ext.create('Ext.data.Store', {
+    fields: ['id', 'name'],
+    pageSize: 9999,
+    proxy: {
+        type: 'ajax',
+        url: '/admin/getList',
+        extraParams: {
+            module: 'item'
+        },
+        reader: {
+            type: 'json',
+            root: 'data',
+            totalProperty: 'total'
+        }
+    }
 });
 
 Ext.define('Tomtalk.FormUI', {
@@ -39,8 +45,28 @@ Ext.define('Tomtalk.FormUI', {
             {
                 xtype: 'textfield',
                 fieldLabel: '主题名称',
+                allowBlank: false,
                 anchor: '50%',
                 name: 'name',
+                emptyText: '请输入…'
+            },
+            {
+                xtype: 'combo',
+                fieldLabel: '单品',
+                id: this.id + '_item_combo',
+                store: itemStore,
+                anchor: '50%',
+                displayField: 'name',
+                valueField: 'id',
+                name: 'item_id',
+                queryMode: 'local'
+            },
+            {
+                xtype: 'numberfield',
+                fieldLabel: '价格',
+                minValue: 0,
+                anchor: '50%',
+                name: 'price',
                 emptyText: '请输入…'
             },
             {
@@ -87,6 +113,7 @@ Ext.define('Tomtalk.FormAction', {
         Tomtalk.FormAction.superclass.initComponent.call(this);
 
         Ext.apply(this.COMPONENTS, {
+            itemCombo: Ext.getCmp(this.id + '_item_combo'),
             saveBtn: Ext.getCmp(this.id + '_save'),
             returnBtn: Ext.getCmp(this.id + '_return')
         });
@@ -98,8 +125,13 @@ Ext.define('Tomtalk.FormAction', {
 
         Tomtalk.FormAction.superclass.initEvents.call(me);
 
+
         $c.saveBtn.on('click', me._save, me);
         $c.returnBtn.on('click', me._return, me);
+    },
+
+    _loadItemCombo: function () {
+        this.COMPONENTS.itemCombo.getStore().load();
     },
 
     _return: function () {
