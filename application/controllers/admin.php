@@ -41,7 +41,7 @@ class admin extends MY_Controller
     public function login()
     {
         $data = array(
-            'msg' => '后台登入',
+            'title' => '后台登入',
             'base_url' => $this->config->config['base_url'],
             'css' => array(
                 '/js/extjs4/resources/css/ext-all.css',
