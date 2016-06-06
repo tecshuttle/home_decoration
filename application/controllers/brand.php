@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class ng extends MY_Controller
+class brand extends MY_Controller
 {
     var $uid = 0;
 
@@ -10,7 +10,7 @@ class ng extends MY_Controller
         $this->load->database();
         $this->load->model('blog_model');
 
-        session_start();
+        //session_start();
         if (isset($_SESSION['uid'])) {
             $this->uid = $_SESSION['uid'];
         }
@@ -155,6 +155,7 @@ class ng extends MY_Controller
         $request_body = file_get_contents('php://input', true);
         $body = json_decode($request_body, true);
         $cid = $body['cid'];
+
 
         $option = array(
             'cid' => $cid

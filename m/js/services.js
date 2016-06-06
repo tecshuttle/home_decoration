@@ -46,6 +46,24 @@ angular.module('starter.services', [])
             }
         };
     })
+    .factory('Brand', function ($http, $rootScope) {
+        return {
+            all: function ($scope) {
+                $http.post('/brand/getList', {
+                    //module: 'tuan'
+                }).success(function (result, status, headers, config) {
+                    $scope.articleList = result;
+                });
+            },
+            getArticle: function ($scope, id) {
+                $http.post('/brand/getBlog', {
+                    cid: id
+                }).success(function (result, status, headers, config) {
+                    $scope.article = result;
+                });
+            }
+        };
+    })
     .factory('Cat', function ($http, $rootScope) {
         return {
             all: function ($scope) {

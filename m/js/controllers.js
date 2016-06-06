@@ -17,6 +17,16 @@ angular.module('starter.controllers', [])
         Tuan.all($scope);
     })
 
+    .controller('BrandCtrl', function ($scope, $stateParams, Brand) {
+        $scope.articleList = [];
+        $scope.article = [];
+        Brand.all($scope);
+
+        if ($stateParams.id) {
+            Brand.getArticle($scope, $stateParams.id)
+        }
+    })
+
     .controller('AccountCtrl', function ($scope) {
 
     });

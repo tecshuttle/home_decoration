@@ -79,6 +79,25 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
                 }
             })
 
+            .state('tab.brand', {
+                url: '/brand',
+                views: {
+                    'tab-brand': {
+                        templateUrl: 'templates/tab-brand-article-list.html',
+                        controller: 'BrandCtrl'
+                    }
+                }
+            })
+            .state('tab.brand-article', {
+                url: '/brand-article/:id',
+                views: {
+                    'tab-brand': {
+                        templateUrl: 'templates/tab-article.html',
+                        controller: 'BrandCtrl'
+                    }
+                }
+            })
+
             .state('tab.account', {
                 url: '/account',
                 views: {
@@ -92,6 +111,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/tab/home');
 
+    })
+
+    .filter('markdown', function ($sce) {
+        var converter = new Showdown.converter();
+        return function (value) {
+            var html = converter.makeHtml(value || '');
+            return $sce.trustAsHtml(html);
+        };
     })
 
     .filter('getCartTotal', function () {
