@@ -1,10 +1,9 @@
 <ion-view view-title="品牌">
     <ion-content>
         <div class="list">
-            <a ng-repeat="t in articleList" class="item {{t.cover ? 'item-thumbnail-left':''}} " href="#/tab/brand-article/{{t.cid}}">
-                <img ng-if="t.avatar" src="{{t.avatar}}" style="max-width: 100%;"/>
-                <img ng-if="t.cover" src="{{t.cover}}" />
-                <h2>{{t.title}}</h2>
+            <a ng-repeat="t in articleList" class="item" href="#/tab/brand-article/{{t.id}}">
+                <img ng-if="t.cover" src="{{t.cover}}" style="max-width: 100%;"/>
+                <h2>{{t.name}}</h2>
             </a>
         </div>
     </ion-content>

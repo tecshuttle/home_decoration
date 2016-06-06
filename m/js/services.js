@@ -49,15 +49,15 @@ angular.module('starter.services', [])
     .factory('Brand', function ($http, $rootScope) {
         return {
             all: function ($scope) {
-                $http.post('/brand/getList', {
+                $http.post('/articles/getNgList', {
                     //module: 'tuan'
                 }).success(function (result, status, headers, config) {
-                    $scope.articleList = result;
+                    $scope.articleList = result.data;
                 });
             },
             getArticle: function ($scope, id) {
-                $http.post('/brand/getBlog', {
-                    cid: id
+                $http.post('/articles/getNgBlog', {
+                    id: id
                 }).success(function (result, status, headers, config) {
                     $scope.article = result;
                 });

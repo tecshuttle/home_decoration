@@ -146,6 +146,34 @@ class articles extends MY_Controller
         }
     }
 
+    public function getNgList()
+    {
+        $option = array(
+            'start' => 0,
+            'limit' => 9999,
+            'type_id' => 277
+        );
+
+        if (isset($option['type_id'])) {
+            $data = $this->articles_model->get($option);
+            echo json_encode($data);
+        }
+    }
+
+    public function getNgBlog()
+    {
+        $request_body = file_get_contents('php://input', true);
+        $body = json_decode($request_body, true);
+        $cid = $body['id'];
+
+        $option = array(
+            'id' => $cid
+        );
+
+        $blog = $this->articles_model->select($option);
+        echo json_encode($blog);
+    }
+
     public function add_rand_pv()
     {
         $query = $this->db->query('select id, name, pv from articles');
